@@ -43,5 +43,32 @@ public class HelloWorldTest {
         System.out.println(response.getHeader("Location"));
     }
 
+    @Test
+    @DisplayName("Ex7: Долгий редирект")
+    public void testLongRedirect() {
+        String url = "https://playground.learnqa.ru/api/long_redirect";
+        int responseCode;
+        int countRedirects = 0;
+        do {
+            Response response = RestAssured
+                    .given()
+                    .redirects()
+                    .follow(false)
+                    .when()
+                    .get(url)
+                    .andReturn();
+
+            String location = response.getHeader("Location");
+
+            responseCode = response.getStatusCode();
+            if (location != null) {
+                url = location;
+                countRedirects++;
+            }
+        } while (responseCode != 200);
+
+        System.out.println("Response code: " + responseCode + ", Url: " + url + ", count redirects: " + countRedirects);
+    }
+
 
 }
