@@ -28,4 +28,20 @@ public class HelloWorldTest {
         List<LinkedHashMap<String, String>> messages = response.getList("messages");
         System.out.println(messages.get(1).get("message"));
     }
+
+    @Test
+    @DisplayName("Ex6: Редирект")
+    public void testRedirect() {
+        Response response = RestAssured
+                .given()
+                .redirects()
+                .follow(false)
+                .when()
+                .get("https://playground.learnqa.ru/api/long_redirect")
+                .andReturn();
+
+        System.out.println(response.getHeader("Location"));
+    }
+
+
 }
