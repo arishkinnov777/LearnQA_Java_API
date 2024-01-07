@@ -2,6 +2,7 @@ package ru.arina.novikova.learn;
 
 import io.restassured.RestAssured;
 import io.restassured.http.Cookie;
+import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
@@ -251,5 +252,17 @@ public class HelloWorldTest {
 
         String homeWorkCookieValue = response.cookie("HomeWork");
         assertEquals("hw_value", homeWorkCookieValue, "Cookie HomeWork contains wrong value");
+    }
+
+    @Test
+    @DisplayName("Ex12: Тест запроса на метод header")
+    public void headerTest() {
+
+        Response response = RestAssured
+                .get("https://playground.learnqa.ru/api/homework_header")
+                .andReturn();
+
+        String secretHeaderValue = response.header("x-secret-homework-header");
+        assertEquals("Some secret value", secretHeaderValue, "Header x-secret-homework-header contains wrong value");
     }
 }
