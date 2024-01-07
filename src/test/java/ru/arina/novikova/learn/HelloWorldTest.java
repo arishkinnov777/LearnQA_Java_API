@@ -112,7 +112,7 @@ public class HelloWorldTest {
         assertEquals("Job is NOT ready", status);
 
         // 3. Ждем нужное количество секунд
-        Thread.sleep(seconds * 1000);
+        Thread.sleep(seconds * 1000L);
 
         // 4. Делаем один запрос c token ПОСЛЕ того, как задача готова, убеждался в правильности поля status и наличии поля result
         response = RestAssured
