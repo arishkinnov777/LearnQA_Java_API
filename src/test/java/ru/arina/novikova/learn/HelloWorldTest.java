@@ -240,4 +240,16 @@ public class HelloWorldTest {
         int stringLength = testedString.length();
         assertTrue(stringLength > 15, "String length is less than 15. testedString: \"" + testedString + "\"");
     }
+
+    @Test
+    @DisplayName("Ex11: Тест запроса на метод cookie")
+    public void cookieTest() {
+
+        Response response = RestAssured
+                .get("https://playground.learnqa.ru/api/homework_cookie")
+                .andReturn();
+
+        String homeWorkCookieValue = response.cookie("HomeWork");
+        assertEquals("hw_value", homeWorkCookieValue, "Cookie HomeWork contains wrong value");
+    }
 }
