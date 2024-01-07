@@ -7,6 +7,8 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +16,9 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HelloWorldTest {
 
@@ -99,7 +104,7 @@ public class HelloWorldTest {
         System.out.println("token: " + token + ", seconds: " + seconds + ", Status: " + status);
 
         // Статус должен быть равен "Job is NOT ready"
-        Assertions.assertEquals("Job is NOT ready", status);
+        assertEquals("Job is NOT ready", status);
 
         // 3. Ждем нужное количество секунд
         Thread.sleep(seconds * 1000);
@@ -116,7 +121,7 @@ public class HelloWorldTest {
 
         // Убеждаемся в правильности поля status
         // Статус должен быть равен "Job is ready"
-        Assertions.assertEquals("Job is ready", status);
+        assertEquals("Job is ready", status);
 
         String result = response.getString("result");
         // Убеждаемся в наличии поля result
@@ -228,4 +233,11 @@ public class HelloWorldTest {
         }
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"Short string", "There is not short string", "There is long string who not throw assertion error"})
+    @DisplayName("Ex10: Тест на короткую фразу")
+    public void testRedirect(String testedString) {
+        int stringLength = testedString.length();
+        assertTrue(stringLength > 15, "String length is less than 15. testedString: \"" + testedString + "\"");
+    }
 }
