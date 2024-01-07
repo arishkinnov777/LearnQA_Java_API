@@ -236,7 +236,7 @@ public class HelloWorldTest {
     @ParameterizedTest
     @ValueSource(strings = {"Short string", "There is not short string", "There is long string who not throw assertion error"})
     @DisplayName("Ex10: Тест на короткую фразу")
-    public void testRedirect(String testedString) {
+    public void testLongString(String testedString) {
         int stringLength = testedString.length();
         assertTrue(stringLength > 15, "String length is less than 15. testedString: \"" + testedString + "\"");
     }
