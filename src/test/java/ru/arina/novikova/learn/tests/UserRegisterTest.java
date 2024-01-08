@@ -2,6 +2,7 @@ package ru.arina.novikova.learn.tests;
 
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -17,6 +18,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
     @Test
+    @DisplayName("Негативный тест на регистрацию существующего пользователя")
     public void createUserWithExistedEmail() {
 
         String email = "vinkotov@example.com";
@@ -35,6 +37,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Test
     @Description("Ex15.1: Тесты на метод user")
+    @DisplayName("Негативный тест на регистрацию пользователя с email без символа @")
     public void createUserWithCorruptedEmail() {
 
         String email = "vinkotovexample.com";
@@ -53,6 +56,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @ParameterizedTest
     @Description("Ex15.2: Тесты на метод user")
+    @DisplayName("Негативный тест на регистрацию пользователя без передачи одного из обязательных полей")
     @ValueSource(strings = {"username", "password", "firstName", "lastName", "email"})
     public void createUserWithoutField(String skippedField) {
         Map<String, String> params = DataGenerator.getRegistrationData();
@@ -68,6 +72,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Test
     @Description("Ex15.3: Тесты на метод user")
+    @DisplayName("Негативный тест на регистрацию пользователя длиной значения поля firstName в один символ")
     public void createUserWithShortFirstName() {
 
         String firstName = "v";
@@ -85,6 +90,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Test
     @Description("Ex15.4: Тесты на метод user")
+    @DisplayName("Негативный тест на регистрацию пользователя длиной значения поля firstName более 250 символов")
     public void createUserWithLongFirstName() {
 
         String firstName = "First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.";
@@ -101,6 +107,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @Test
+    @DisplayName("Позитивный тест на регистрацию пользователя")
     public void createUserSuccessfully() {
         Map<String, String> params = DataGenerator.getRegistrationData();
 

@@ -2,6 +2,7 @@ package ru.arina.novikova.learn.tests;
 
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.arina.novikova.learn.lib.ApiCoreRequests;
 import ru.arina.novikova.learn.lib.Assertions;
@@ -14,6 +15,7 @@ public class UserGetTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
     @Test
+    @DisplayName("Негативный тест на получение данных о пользователе, будучи не авторизованным")
     public void testGetUserDetailsNotAuth() {
         Response response = apiCoreRequests.makeGetRequest("https://playground.learnqa.ru/api/user/2");
 
@@ -24,6 +26,7 @@ public class UserGetTest extends BaseTestCase {
     }
 
     @Test
+    @DisplayName("Позитивный тест на получение данных о пользователе")
     public void testGetUserDetailsAuthSameUser() {
         Map<String, String> authData = new HashMap<>();
         authData.put("email", "vinkotov@example.com");
@@ -44,6 +47,7 @@ public class UserGetTest extends BaseTestCase {
 
     @Test
     @Description("Ex16: Запрос данных другого пользователя")
+    @DisplayName("Негативный тест на получение данных о пользователе, будучи авторизованным другим пользователем")
     public void testGetUserDetailsAuthAnotherUser() {
         Map<String, String> authData = new HashMap<>();
         authData.put("email", "vinkotov@example.com");
