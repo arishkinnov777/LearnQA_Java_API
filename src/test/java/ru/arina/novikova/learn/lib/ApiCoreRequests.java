@@ -21,6 +21,14 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+    @Step("Make a GET-request")
+    public Response makeGetRequest(String url) {
+        return given()
+                .filter(new AllureRestAssured())
+                .get(url)
+                .andReturn();
+    }
+
     @Step("Make a GET-request with token only")
     public Response makeGetRequestWithToken(String url, String token) {
         return given()
