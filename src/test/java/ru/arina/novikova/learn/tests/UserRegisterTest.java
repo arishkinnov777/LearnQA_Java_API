@@ -1,5 +1,6 @@
 package ru.arina.novikova.learn.tests;
 
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -33,6 +34,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @Test
+    @Description("Ex15.1: Тесты на метод user")
     public void createUserWithCorruptedEmail() {
 
         String email = "vinkotovexample.com";
@@ -50,6 +52,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @ParameterizedTest
+    @Description("Ex15.2: Тесты на метод user")
     @ValueSource(strings = {"username", "password", "firstName", "lastName", "email"})
     public void createUserWithoutField(String skippedField) {
         Map<String, String> params = DataGenerator.getRegistrationData();
@@ -64,6 +67,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @Test
+    @Description("Ex15.3: Тесты на метод user")
     public void createUserWithShortFirstName() {
 
         String firstName = "v";
@@ -80,6 +84,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @Test
+    @Description("Ex15.4: Тесты на метод user")
     public void createUserWithLongFirstName() {
 
         String firstName = "First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.First name more than 250 characters.";
