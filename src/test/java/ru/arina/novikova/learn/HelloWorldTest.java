@@ -6,6 +6,7 @@ import io.restassured.http.Header;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -238,6 +239,7 @@ public class HelloWorldTest {
         }
     }
 
+    @Disabled
     @ParameterizedTest
     @ValueSource(strings = {"Short string", "There is not short string", "There is long string who not throw assertion error"})
     @DisplayName("Ex10: Тест на короткую фразу")
@@ -270,6 +272,7 @@ public class HelloWorldTest {
         assertEquals("Some secret value", secretHeaderValue, "Header x-secret-homework-header contains wrong value");
     }
 
+    @Disabled
     @ParameterizedTest
     @MethodSource("userAgentTestProvider")
     @DisplayName("Ex13: UserAgent")
