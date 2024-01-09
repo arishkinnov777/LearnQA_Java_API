@@ -14,7 +14,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag learn_api_test:$(date +%s)
-    - name: Run tests
-      run: docker run --rm --mount type=bind,src=$(pwd),target=/tests/ java_api_tests:latest
+    - name: Run tests in Docker container
+      run: docker-compose up --build
